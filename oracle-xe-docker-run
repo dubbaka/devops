@@ -1,0 +1,11 @@
+docker run --name myxedb \
+    -d \
+    -p 51521:1521 \
+    -p 55500:5500 \
+    -e ORACLE_PWD=oracle \
+    -e ORACLE_CHARACTERSET=AL32UTF8 \
+    -v /home/nath/Docker/myxedb/oradata:/opt/oracle/oradata \
+    -v /home/nath/Docker/myxedb/scripts/setup:/opt/oracle/scripts/setup \
+    -v /home/nath/Docker/myxedb/scripts/startup:/opt/oracle/scripts/startup \
+    --network myoracle_network \
+    oracle/database:18.4.0-xe

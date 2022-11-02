@@ -1,0 +1,10 @@
+---
+# Install Apache Tomcat & Maven using tomcat,maven role.
+
+- hosts : "{{ node }}"
+  become : true
+  vars:
+    ansible_become_pass: vagrant
+  roles:
+    - role: tomcat
+    - role: maven

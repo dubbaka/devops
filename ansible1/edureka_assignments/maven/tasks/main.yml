@@ -1,0 +1,44 @@
+---
+# tasks file for maven
+- name: Add java respository to source.
+  apt_repository:
+    repo: ppa:webupd8team/java
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version < '20'
+
+- name: Add java respository to source.
+  apt_repository:
+    repo: ppa:linuxuprising/java
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version > '20'
+
+- name: updates registry.
+  become: true
+  apt:
+    update_cache: yes
+
+- name: install dependencies for JAVA.
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+    update_cache: true
+  with_items:
+    - "python3-software-properties"
+    - "default-jdk"
+
+- name: create software directory.
+  file:
+    path: /opt/maven
+    state: directory
+    mode: 0755
+    recurse: yes
+
+- name: download and unzip software.
+  unarchive:
+    src: https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
+    dest: /opt/maven
+    remote_src: yes
+    extra_opts : [--strip-components=1]
+
+- name: Set maven environment.
+  shell: "sudo update-alternatives --install /usr/bin/mvn maven /opt/maven/bin/mvn 1000"
+
+

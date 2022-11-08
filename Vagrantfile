@@ -45,6 +45,7 @@ Vagrant.configure("2") do |config|
     end
     kubemaster.vm.box = "bento/ubuntu-18.04"
     kubemaster.vm.network "public_network", bridge: "wlp3s0", type: "dhcp"
+    kubemaster.vm.network "public_network", bridge: "enp5s0", ip: "192.168.1.215"
     kubemaster.vm.network "private_network", ip: "192.168.56.15"
   end
 

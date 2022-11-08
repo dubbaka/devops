@@ -73,8 +73,8 @@ Vagrant.configure("2") do |config|
       w3.memory = 1500
     end
     docker1.vm.box = "bento/ubuntu-18.04"
-    docker1.vm.network "public_network", bridge: "wlp3s0", ip: "192.168.0.218"
-    #docker1.vm.network "public_network", bridge: "wlp3s0", type: "dhcp"
+    docker1.vm.network "public_network", bridge: "enp5s0", ip: "192.168.1.218"
+    docker1.vm.network "public_network", bridge: "wlp3s0", type: "dhcp"
     docker1.vm.network "private_network", ip: "192.168.56.18"
   end
 
@@ -83,8 +83,8 @@ Vagrant.configure("2") do |config|
       w3.memory = 1500
     end
     docker2.vm.box = "bento/ubuntu-18.04"
-    docker2.vm.network "public_network", bridge: "wlp3s0", ip: "192.168.0.219"
-    #docker2.vm.network "public_network", bridge: "wlp3s0", type: "dhcp"
+    docker2.vm.network "public_network", bridge: "enp5s0", ip: "192.168.1.219"
+    docker2.vm.network "public_network", bridge: "wlp3s0", type: "dhcp"
     docker2.vm.network "private_network", ip: "192.168.56.19"
   end
 
@@ -93,8 +93,8 @@ Vagrant.configure("2") do |config|
       w3.memory = 1500
     end
     docker3.vm.box = "bento/ubuntu-18.04"
-    docker3.vm.network "public_network", bridge: "wlp3s0", ip: "192.168.0.220"
-    #docker3.vm.network "public_network", bridge: "wlp3s0", type: "dhcp"
+    docker3.vm.network "public_network", bridge: "enp5s0", ip: "192.168.1.220"
+    docker3.vm.network "public_network", bridge: "wlp3s0", type: "dhcp"
     docker3.vm.network "private_network", ip: "192.168.56.20"
   end
 

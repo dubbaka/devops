@@ -1,0 +1,1 @@
+    docker service create -d --replicas=3  --name nginx-web  -p 8089:80  --mount volume-driver=vieux/sshfs,source=nginx-config-vol,target=/usr/share/nginx/html,volume-opt=sshcmd=nath@192.168.56.1:/home/nath/devops/docker/mywebsite,volume-opt=password="nath" dubbaka/webserver:latest

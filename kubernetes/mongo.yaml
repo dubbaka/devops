@@ -23,11 +23,6 @@ spec:
           volumeMounts:
             - name: storage
               mountPath: /data/db
-      volumes:
-        - name: storage
-          PersistentVolumeClaim:
-            claimName: pvc-mongo-data
-
 ---
 apiVersion: v1
 kind: Service

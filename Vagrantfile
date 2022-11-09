@@ -1,49 +1,56 @@
 Vagrant.configure("2") do |config|
+  #config.ssh.private_key_path = "/home/nath/.vagrant.d/insecure_private_key"
 
   config.vm.define "master" do |master|
-    config.vm.provider "virtualbox" do |m|
+    master.vm.provider "virtualbox" do |m|
       m.memory = 2048
     end
-
     master.vm.box = "bento/ubuntu-18.04"
     master.vm.network "public_network", bridge: "wlp3s0", type: "dhcp"
     master.vm.network "private_network", ip: "192.168.56.10"
   end
 
   config.vm.define "worker01" do |worker01|
-    config.vm.provider "virtualbox" do |w1|
-      w1.memory = 2048
+    worker01.vm.provider "virtualbox" do |w1|
+      w1.memory = 3072
+      w1.cpus = 2
     end
-    worker01.vm.box = "bento/ubuntu-18.04"
+    worker01.vm.box = "bento/ubuntu-22.04"
+    worker01.vm.hostname = "worker01"
     worker01.vm.network "public_network", bridge: "wlp3s0", type: "dhcp"
+    worker01.vm.network "public_network", bridge: "enp5s0", ip: "192.168.1.212"
     worker01.vm.network "private_network", ip: "192.168.56.12"
   end
 
   config.vm.define "worker02" do |worker02|
-    config.vm.provider "virtualbox" do |w2|
+    worker02.vm.provider "virtualbox" do |w2|
       w2.memory = 2048
     end
-    worker02.vm.box = "bento/ubuntu-18.04"
+    worker02.vm.box = "bento/ubuntu-22.04"
+    worker02.vm.hostname = "worker02"
     worker02.vm.network "public_network", bridge: "wlp3s0", type: "dhcp"
+    worker02.vm.network "public_network", bridge: "enp5s0", ip: "192.168.1.213"
     worker02.vm.network "private_network", ip: "192.168.56.13"
   end
 
   config.vm.define "worker03" do |worker03|
-    config.vm.provider "virtualbox" do |w3|
-      w3.memory = 3072
-      w3.cpus = 2
+    worker03.vm.provider "virtualbox" do |w3|
+      w3.memory = 1200
     end
-    worker03.vm.box = "bento/ubuntu-18.04"
+    worker03.vm.box = "bento/ubuntu-22.04"
+    worker03.vm.hostname = "worker03"
     worker03.vm.network "public_network", bridge: "wlp3s0", type: "dhcp"
+    worker03.vm.network "public_network", bridge: "enp5s0", ip: "192.168.1.214"
     worker03.vm.network "private_network", ip: "192.168.56.14"
   end
 
   config.vm.define "kubemaster" do |kubemaster|
-    config.vm.provider "virtualbox" do |w3|
-      w3.memory = 2500
-      w3.cpus = 2
+    kubemaster.vm.provider "virtualbox" do |k3|
+      k3.memory = 3500
+      k3.cpus = 2
     end
-    kubemaster.vm.box = "bento/ubuntu-18.04"
+    kubemaster.vm.box = "bento/ubuntu-22.04"
+    kubemaster.vm.hostname = "kubemaster"
     kubemaster.vm.network "public_network", bridge: "wlp3s0", type: "dhcp"
     kubemaster.vm.network "public_network", bridge: "enp5s0", ip: "192.168.1.215"
     kubemaster.vm.network "private_network", ip: "192.168.56.15"

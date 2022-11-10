@@ -17,7 +17,7 @@ spec:
         app: mongodb
     spec:
       containers:
-      - image: lerndevops/mongo
+      - image: pulakdocker/mongo
         name: mongo
 
 ---
@@ -52,7 +52,7 @@ spec:
         app: myapp
     spec:
       containers:
-      - image: lerndevops/springboot-mongo-app:latest
+      - image: pulakdocker/springboot-mongo-app
         name: springboot-mongo-app
 
 ---
@@ -67,3 +67,5 @@ spec:
    - port: 8080
   selector:
     app: myapp
+  externalIPs:
+    - 192.168.1.213

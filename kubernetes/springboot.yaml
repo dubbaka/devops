@@ -32,6 +32,10 @@ spec:
     - port: 27017
    selector:
      app: mongodb
+   externalIPs:
+     - 192.168.1.212
+     - 192.168.1.213
+     - 192.168.1.215
 
 ---
 apiVersion: apps/v1
@@ -68,4 +72,6 @@ spec:
   selector:
     app: myapp
   externalIPs:
+    - 192.168.1.212
     - 192.168.1.213
+    - 192.168.1.215

@@ -1,0 +1,6 @@
+# Fix this issue kube nodes have same INTERNAL-IP address when using vagrant with Virtualbox, below steps can assign wanted ip address to the kube master and worker nodes
+$ DROPLET_IP_ADDRESS=$(ip addr show dev eth0 | awk 'match($0,/inet (([0-9]|\.)+).* scope global eth0$/,a) { print a[1]; exit }')
+$ echo $DROPLET_IP_ADDRESS  # check this, jus tin case
+$ echo "Environment=\"KUBELET_EXTRA_ARGS=--node-ip=$DROPLET_IP_ADDRESS\"" >> /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+$ systemctl daemon-reload
+$ systemctl restart kubelet

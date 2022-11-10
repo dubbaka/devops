@@ -63,7 +63,11 @@ spec:
   selector:
     app: mongo
   ports:
-     port: 27017
+    - port: 27017
+  externalIPs:
+    - 192.168.1.212
+    - 192.168.1.213
+    - 192.168.1.215
 
 ---
 apiVersion: apps/v1

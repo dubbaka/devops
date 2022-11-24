@@ -1,0 +1,36 @@
+---
+#Simple Ansible Playbook to pull Docker Image from the registry and run a Docker containers
+ 
+- import_playbook: build-push.yaml
+ 
+- name: Playbook to build and run Docker
+  hosts: docker3
+  gather_facts: false
+ 
+  tasks:
+    - name: Host folder creation
+      become: yes
+      file:
+        name: /opt/share/nginx/html
+        state: directory
+        owner: www-data
+        group: www-data
+
+    - name: Copy website content
+      become: yes
+      copy:
+        src: /opt/docker2/website
+        dest: /opt/share/nginx/html
+        owner: www-data
+        group: www-data
+
+    - name: stop running docker container
+      command: "docker stop simple"
+      ignore_errors: yes
+
+    - name: delete simple docker container
+      command: "docker rm simple"
+      ignore_errors: yes
+
+    - name: build site by running ansible in a docker container
+      command: "docker run -d -p 8094:8080 -it -v /opt/share/nginx/html/website:/usr/share/nginx/html --name simple dubbaka/simple-nginx-image"

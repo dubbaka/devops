@@ -57,20 +57,22 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "jenkins" do |jenkins|
-    config.vm.provider "virtualbox" do |w3|
-      w3.memory = 1500
+    jenkins.vm.provider "virtualbox" do |j3|
+      j3.memory = 3500
     end
     jenkins.vm.box = "bento/ubuntu-18.04"
     jenkins.vm.network "public_network", bridge: "wlp3s0", type: "dhcp"
+    #jenkins.vm.network "public_network", bridge: "enp5s0", ip: "192.168.1.216"
     jenkins.vm.network "private_network", ip: "192.168.56.16"
   end
 
   config.vm.define "tomcat" do |tomcat|
-    config.vm.provider "virtualbox" do |w3|
-      w3.memory = 1500
+    tomcat.vm.provider "virtualbox" do |t3|
+      t3.memory = 1500
     end
     tomcat.vm.box = "bento/ubuntu-18.04"
     tomcat.vm.network "public_network", bridge: "wlp3s0", type: "dhcp"
+    tomcat.vm.network "public_network", bridge: "enp5s0", ip: "192.168.1.217"
     tomcat.vm.network "private_network", ip: "192.168.56.17"
   end
 
@@ -80,7 +82,7 @@ Vagrant.configure("2") do |config|
       w3.memory = 1500
     end
     docker1.vm.box = "bento/ubuntu-18.04"
-    docker1.vm.network "public_network", bridge: "enp5s0", ip: "192.168.1.218"
+    #docker1.vm.network "public_network", bridge: "enp5s0", ip: "192.168.1.218"
     docker1.vm.network "public_network", bridge: "wlp3s0", type: "dhcp"
     docker1.vm.network "private_network", ip: "192.168.56.18"
   end
@@ -90,7 +92,7 @@ Vagrant.configure("2") do |config|
       w3.memory = 1500
     end
     docker2.vm.box = "bento/ubuntu-18.04"
-    docker2.vm.network "public_network", bridge: "enp5s0", ip: "192.168.1.219"
+    #docker2.vm.network "public_network", bridge: "enp5s0", ip: "192.168.1.219"
     docker2.vm.network "public_network", bridge: "wlp3s0", type: "dhcp"
     docker2.vm.network "private_network", ip: "192.168.56.19"
   end

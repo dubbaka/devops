@@ -4,3 +4,17 @@ $ echo $DROPLET_IP_ADDRESS  # check this, jus tin case
 $ echo "Environment=\"KUBELET_EXTRA_ARGS=--node-ip=$DROPLET_IP_ADDRESS\"" >> /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 $ systemctl daemon-reload
 $ systemctl restart kubelet
+
+
+commands
+
+kubectl create deployment myemp --image='devopsedu/employee' --port=80 -n edureka
+
+
+kubectl expose deployment myemp --type=NodePort --port=80 --target-port=8888 --external-ip=192.168.1.213 --selector='app=myemp' --name=myemp -n edureka
+
+kubectl create deployment mongo --image=mongo --port=27017 --namespace=nodejsapp
+
+kubectl expose deployment mongo --type=NodePort --target-port=27017 --external-ip=192.168.1.213 --selector='app=mongo' --name=mongo -n nodejsapp
+
+kubectl expose deployment mongodb --target-port=27017 --external-ip=192.168.1.213 --selector='app=mongodb' --name=mongo -n edureka
